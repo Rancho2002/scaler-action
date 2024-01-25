@@ -8,6 +8,8 @@ import os
 import openai
 
 MY_SECRET = os.getenv("SECRET_KEY")
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 intents = discord.Intents.default()
 intents.message_content = True
 
