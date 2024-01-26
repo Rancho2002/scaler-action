@@ -258,15 +258,14 @@ async def on_ready():
   print("Bot is ready, ho gaya")
 
 
-@bot.event
-async def on_message(message):
-  # if message.author == bot.user or message.channel.id != 1200389727023546389:
-  #   return
-  if message.author == bot.user:
-    return
-  else:
-    await message.channel.send("Type /help to get more info of republic bot")
-
+# @bot.event
+# async def on_message(message):
+#   # if message.author == bot.user or message.channel.id != 1200389727023546389:
+#   #   return
+#   if message.author == bot.user:
+#     return
+# else:
+#   await message.channel.send("Type /help to get more info of republic bot")
 
 # @bot.tree.command()
 # async def search(interaction: Interaction, arg: str):
