@@ -331,9 +331,9 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
         }])
 
     extra = response["choices"][0]["message"]["content"]
-    info2 = f"\nTo know the details of {details_parts[parts]['Title']}, visit here https://www.clearias.com/constitution-of-india/{info}"
-    articles = "\n📰🔍 Included articles under this part: " + details_parts[
-        parts]["article"]
+    info2 = f"\nTo know the details of {details_parts[parts]['Title']}, visit here https://www.clearias.com/constitution-of-india/{info}" + " 🚀✨"
+    articles = "\n\n📰🔍 *Included articles under this part:* **" + details_parts[
+        parts]["article"] + "** \n\n"
     ans = extra + articles + info2
     await interaction.response.send_message(ans)
   else:
@@ -344,7 +344,7 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
               "Title"] else details_parts[i]["Title"]
       message += details_parts[i]["Title"]
       message += "\n"
-    message += "## :rocket: Now please let me know in which part you interested.\n"
+    message += "## :rocket: *Now please let me know in which part you interested.*\n"
 
     await interaction.response.send_message(
         "## You have entered invalid part number. Here is the list\n" +
