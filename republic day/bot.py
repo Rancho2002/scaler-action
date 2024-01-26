@@ -234,35 +234,63 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-  if message.author == bot.user or message.channel.id != 1200389727023546389:
+  # if message.author == bot.user or message.channel.id != 1200389727023546389:
+  #   return
+  if message.author == bot.user:
     return
   else:
     await message.channel.send("Type /help to get more info of republic bot")
 
 
 # @bot.tree.command()
-# async def ping(interaction: Interaction):
-#   await interaction.response.send_message("Pong!")
+# async def search(interaction: Interaction, arg: str):
+#   prompt = arg
+#   response = openai.ChatCompletion.create(
+#       model="gpt-3.5-turbo",
+#       messages=[{
+#           "role": "system",
+#           "content": "You are helpful assistant on Indian constitution"
+#       }, {
+#           "role":
+#           "user",
+#           "content":
+#           f"You are a wise person on Indian constituion. You have to give very concise response exact 2 sentence within 50 words(remember word count)\n{prompt}"
+#       }])
+#   await interaction.response.send_message(
+#       response["choices"][0]["message"]["content"])
 
 
-@bot.tree.command(name="help", description="get info about commands")
+@bot.tree.command(name="help",
+                  description="Get information about available commands")
+@app_commands.describe(parts="Details about any one part among 22 parts")
 async def help(interaction: Interaction, parts: Optional[int] = None):
-  allowed_channel_id = 1200389727023546389  # Replace with your desired channel ID
-  if interaction.channel_id != allowed_channel_id:
-    await interaction.response.send_message(
-        "This command can only be used in the https://discord.com/channels/913712321161998348/1200389727023546389 channel."
-    )
-    return
+  # allowed_channel_id = 1200389727023546389  # Replace with your desired channel ID
+  # if interaction.channel_id != allowed_channel_id:
+  #   await interaction.response.send_message(
+  #       "This command can only be used in the https://discord.com/channels/913712321161998348/1200389727023546389 channel."
+  #   )
+  #   return
 
   if parts is None:
     # Display general help
     await interaction.response.send_message(
-        "## Constitution of India contains 395 articles in 22 parts. There are also 12 schedules in the Indian Constitution. If you are not aware about the parts in our constitution type /help <part number> and give any negative number or greater than 22, you will get a complete list of our constitution. Else you can type /help <part number> to get more info about the each part.\n\n"
-    )
+        '''### 📜 Constitution of India Overview:
+- Contains 395 articles in 22 parts.
+- Includes 12 schedules.
+
+🚀 **Usage:**
+- Type `/help <part number>` for information on a specific part.
+- Use any negative number or a number greater than 22 to get the complete list.
+
+📚 **Examples:**
+- `/help parts 5` - Get more info about Part V.
+- `/help parts -1` - Receive a complete list of the Constitution.
+
+🌐 **Explore and Learn!**
+''')
 
   elif parts >= 0 and parts < 23:
     info = details_parts[parts]["tags"]
-    
     prompt = details_parts[parts]["Title"]
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -276,8 +304,9 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
             f"You are a wise person on Indian constituion. You have to give very concise response exact 2 sentence within 50 words(remember word count)\n{prompt}"
         }])
 
-    extra=response["choices"][0]["message"]["content"]
-    info2 = f"\nFor more details visit here https://www.clearias.com/constitution-of-india/{info}"
+    extra = response["choices"][0]["message"]["content"]
+    info2 = f"\nTo know the details of {details_parts[parts]['Title']}, visit here https://www.clearias.com/constitution-of-india/{info}"
+    ans = info2
     ans = extra + info2
     await interaction.response.send_message(ans)
   else:
