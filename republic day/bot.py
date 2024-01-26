@@ -12,24 +12,29 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 ##### DATAS
 details_parts = {
     0: {
-        'Title': '\nPREAMBLE',
-        'tags': '#preamble'
+        'Title': 'PREAMBLE',
+        'tags': '#preamble',
+        'article': 'Since this is preamble, no articles under it.'
     },
     1: {
         'Title': 'PART I:\xa0THE UNION AND ITS TERRITORY',
-        'tags': '#part-i-the-union-and-its-territory'
+        'tags': '#part-i-the-union-and-its-territory',
+        'article': 'Article 1-4'
     },
     2: {
         'Title': 'PART II:\xa0CITIZENSHIP',
-        'tags': '#part-ii-citizenship'
+        'tags': '#part-ii-citizenship',
+        'article': 'Article 5-11'
     },
     3: {
         'Title': 'PART III :\xa0FUNDAMENTAL RIGHTS',
-        'tags': '#part-iii-fundamental-rights'
+        'tags': '#part-iii-fundamental-rights',
+        'article': 'Article 12-35'
     },
     4: {
         'Title': 'PART IV: DIRECTIVE PRINCIPLES OF STATE POLICY',
-        'tags': '#part-iv-directive-principles-of-state-policy'
+        'tags': '#part-iv-directive-principles-of-state-policy',
+        'article': 'Article 36-51, in PART-IVA Article 51A'
     },
     25: {
         'Title': 'PART IVA: FUNDAMENTAL DUTIES',
@@ -37,7 +42,8 @@ details_parts = {
     },
     5: {
         'Title': 'PART V:\xa0THE UNION',
-        'tags': '#part-v-the-union'
+        'tags': '#part-v-the-union',
+        'article': 'Article 52-151'
     },
     27: {
         'Title': 'CHAPTER I: THE EXECUTIVE',
@@ -61,7 +67,8 @@ details_parts = {
     },
     6: {
         'Title': 'PART VI:\xa0THE STATES',
-        'tags': '#part-vi-the-states'
+        'tags': '#part-vi-the-states',
+        'article': 'Article 152-237'
     },
     23: {
         'Title': 'CHAPTER I: GENERAL',
@@ -89,15 +96,21 @@ details_parts = {
     },
     7: {
         'Title': 'PART VII: THE STATES IN PART B OF THE FIRST SCHEDULE',
-        'tags': '#part-vii-the-states-in-part-b-of-the-first-schedule'
+        'tags': '#part-vii-the-states-in-part-b-of-the-first-schedule',
+        'article': '-'
     },
     8: {
         'Title': 'PART VIII: THE UNION TERRITORIES',
-        'tags': '#part-viii-the-union-territories'
+        'tags': '#part-viii-the-union-territories',
+        'article': 'Article 239-242'
     },
     9: {
-        'Title': 'PART IX: THE PANCHAYATS',
-        'tags': '#part-ix-the-panchayats'
+        'Title':
+        'PART IX: THE PANCHAYATS',
+        'tags':
+        '#part-ix-the-panchayats',
+        'article':
+        'Article 243-243O, in Part IXA Article 243P-243ZG, in Part IXB Article 243ZH-243ZT'
     },
     40: {
         'Title': 'PART IXA: THE MUNICIPALITIES',
@@ -109,11 +122,13 @@ details_parts = {
     },
     10: {
         'Title': 'PART X: THE SCHEDULED AND TRIBAL AREAS',
-        'tags': '#part-x-the-scheduled-and-tribal-areas'
+        'tags': '#part-x-the-scheduled-and-tribal-areas',
+        'article': 'Article 244-244A'
     },
     11: {
         'Title': 'PART XI: RELATIONS BETWEEN THE UNION AND THE STATES',
-        'tags': '#part-xi-relations-between-the-union-and-the-states'
+        'tags': '#part-xi-relations-between-the-union-and-the-states',
+        'article': 'Article 245-263'
     },
     42: {
         'Title': 'CHAPTER I: LEGISLATIVE RELATIONS',
@@ -125,7 +140,8 @@ details_parts = {
     },
     12: {
         'Title': 'PART XII: FINANCE, PROPERTY, CONTRACTS AND SUITS',
-        'tags': '#part-xii-finance-property-contracts-and-suits'
+        'tags': '#part-xii-finance-property-contracts-and-suits',
+        'article': 'Article 264-300A'
     },
     44: {
         'Title': 'CHAPTER I: FINANCE',
@@ -149,15 +165,17 @@ details_parts = {
         'Title':
         'PART XIII: TRADE, COMMERCE, AND INTERCOURSE WITHIN THE TERRITORY OF INDIA',
         'tags':
-        '#part-xiii-trade-commerce-and-intercourse-within-the-territory-of-india'
+        '#part-xiii-trade-commerce-and-intercourse-within-the-territory-of-india',
+        'article': 'Article 301-307'
     },
     14: {
         'Title': 'PART XIV: SERVICES UNDER THE UNION AND THE STATES',
-        'tags': '#part-xiv-services-under-the-union-and-the-states'
+        'tags': '#part-xiv-services-under-the-union-and-the-states',
+        'article': 'Article 308-323, in Part XIVA Article 323A-323B'
     },
     48: {
         'Title': 'CHAPTER I: SERVICES',
-        'tags': '#chapter-i-services'
+        'tags': '#chapter-i-services',
     },
     49: {
         'Title': 'CHAPTER II: PUBLIC SERVICE COMMISSIONS',
@@ -169,15 +187,18 @@ details_parts = {
     },
     15: {
         'Title': 'PART XV:\xa0ELECTIONS',
-        'tags': '#part-xv-elections'
+        'tags': '#part-xv-elections',
+        'article': 'Article 324-329A'
     },
     16: {
         'Title': 'PART XVI:\xa0SPECIAL PROVISIONS RELATING TO CERTAIN CLASSES',
-        'tags': '#part-xvi-special-provisions-relating-to-certain-classes'
+        'tags': '#part-xvi-special-provisions-relating-to-certain-classes',
+        'article': 'Article 330-342'
     },
     17: {
         'Title': 'PART XVII:\xa0OFFICIAL LANGUAGE',
-        'tags': '#part-xvii-official-language'
+        'tags': '#part-xvii-official-language',
+        'article': 'Article 343-351'
     },
     51: {
         'Title': 'CHAPTER I: LANGUAGE OF THE UNION',
@@ -198,26 +219,31 @@ details_parts = {
     },
     18: {
         'Title': 'PART XVIII:\xa0EMERGENCY PROVISIONS',
-        'tags': '#part-xviii-emergency-provisions'
+        'tags': '#part-xviii-emergency-provisions',
+        'article': 'Article 352-360'
     },
     19: {
         'Title': 'PART XIX:\xa0MISCELLANEOUS',
-        'tags': '#part-xix-miscellaneous'
+        'tags': '#part-xix-miscellaneous',
+        'article': 'Article 361-367'
     },
     20: {
         'Title': 'PART XX:\xa0AMENDMENT OF THE CONSTITUTION',
-        'tags': '#part-xx-amendment-of-the-constitution'
+        'tags': '#part-xx-amendment-of-the-constitution',
+        'article': 'Article 368'
     },
     21: {
         'Title':
         'PART XXI:\xa0TEMPORARY, TRANSITIONAL AND\xa0SPECIAL PROVISIONS',
-        'tags': '#part-xxi-temporary-transitional-and-special-provisions'
+        'tags': '#part-xxi-temporary-transitional-and-special-provisions',
+        'article': 'Article 369-392'
     },
     22: {
         'Title':
         'PART XXII:\xa0SHORT TITLE, COMMENCEMENT, AUTHORITATIVE TEXT\xa0IN HINDI AND REPEALS',
         'tags':
-        '#part-xxii-short-title-commencement-authoritative-text-in-hindi-and-repeals'
+        '#part-xxii-short-title-commencement-authoritative-text-in-hindi-and-repeals',
+        'article': 'Article 393-395'
     }
 }
 intents = discord.Intents.default()
@@ -301,13 +327,14 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
             "role":
             "user",
             "content":
-            f"You are a wise person on Indian constituion. You have to give very concise response exact 2 sentence within 50 words(remember word count)\n{prompt}"
+            f"You are a wise person on Indian constituion. You have to give very concise response exact 2 sentence within 60 words(remember word count) Also give some emojis if needed to make attractive\n{prompt}"
         }])
 
     extra = response["choices"][0]["message"]["content"]
     info2 = f"\nTo know the details of {details_parts[parts]['Title']}, visit here https://www.clearias.com/constitution-of-india/{info}"
-    ans = info2
-    ans = extra + info2
+    articles = "\n📰🔍 Included articles under this part: " + details_parts[
+        parts]["article"]
+    ans = extra + articles + info2
     await interaction.response.send_message(ans)
   else:
     message = ""
@@ -320,7 +347,8 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
     message += "## :rocket: Now please let me know in which part you interested.\n"
 
     await interaction.response.send_message(
-        "## You have entered invalid part number. Here is the list" + message)
+        "## You have entered invalid part number. Here is the list\n" +
+        message)
 
 
 bot.run(MY_SECRET)
