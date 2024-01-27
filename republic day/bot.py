@@ -6,7 +6,7 @@ from discord import app_commands, Interaction
 from discord.ext import commands
 from typing import Optional
 
-# MY_SECRET = os.getenv("SECRET_KEY")
+MY_SECRET = os.getenv("SECRET_KEY")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 ##### DATAS
@@ -373,6 +373,4 @@ async def help(interaction: Interaction,
         message)
 
 
-# bot.run(MY_SECRET)
-bot.run(
-    "MTA1NzY1MTgzNjAxMTY5MjExMw.GYOq7a.LPD3hvxEUZnL2ihGXBfHRQPM4IgkIWaCBzQS1M")
+bot.run(MY_SECRET)
