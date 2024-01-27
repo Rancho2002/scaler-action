@@ -6,7 +6,7 @@ from discord import app_commands, Interaction
 from discord.ext import commands
 from typing import Optional
 
-MY_SECRET = os.getenv("SECRET_KEY")
+# MY_SECRET = os.getenv("SECRET_KEY")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 ##### DATAS
@@ -287,8 +287,12 @@ async def on_ready():
 
 @bot.tree.command(name="help",
                   description="Get information about available commands")
-@app_commands.describe(parts="Details about any one part among 22 parts")
-async def help(interaction: Interaction, parts: Optional[int] = None):
+@app_commands.describe(parts="Details about any one part among 22 parts",
+                       articleinfo="Details of any individual article")
+# @app_commands.describe(articles="Details about any one part among 22 parts")
+async def help(interaction: Interaction,
+               parts: Optional[int] = None,
+               articleinfo: Optional[int] = None):
   # allowed_channel_id = 1200389727023546389  # Replace with your desired channel ID
   # if interaction.channel_id != allowed_channel_id:
   #   await interaction.response.send_message(
@@ -296,7 +300,7 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
   #   )
   #   return
 
-  if parts is None:
+  if parts is None and articleinfo is None:
     # Display general help
     await interaction.response.send_message(
         '''### 📜 Constitution of India Overview:
@@ -305,16 +309,18 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
 
 🚀 **Usage:**
 - Type `/help <part number>` for information on a specific part.
-- Use any negative number or a number greater than 22 to get the complete list.
+- Type `/help <article number>` for information on a specific part.
+- Use any negative number or a number greater than 22 in part number or number greater than 395 in article number to get the complete list.
 
 📚 **Examples:**
 - `/help parts 5` - Get more info about Part V.
 - `/help parts -1` - Receive a complete list of the Constitution.
+- `/help articleinfo 12` - Get more info about article 12.
 
 🌐 **Explore and Learn!**
 ''')
 
-  elif parts >= 0 and parts < 23:
+  elif parts is not None and parts >= 0 and parts < 23:
     info = details_parts[parts]["tags"]
     prompt = details_parts[parts]["Title"]
     response = openai.ChatCompletion.create(
@@ -335,6 +341,23 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
         parts]["article"] + "** \n\n"
     ans = extra + articles + info2
     await interaction.response.send_message(ans)
+
+  elif articleinfo is not None:
+    prompt = articleinfo
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{
+            "role": "system",
+            "content": "You are helpful assistant on Indian constitution"
+        }, {
+            "role":
+            "user",
+            "content":
+            f"You are a wise person on Indian constituion articles. You are given an article number, you just need to brief that particular article. Start with Article <given number> states that ..If anyone give invalid article number, tell him the range of number of articles. You have to give very concise response exact 2 sentence within 60 words(remember word count) Also give some emojis if needed to make attractive\n{prompt}"
+        }])
+    ans = response["choices"][0]["message"]["content"]
+    await interaction.response.send_message(ans)
+
   else:
     message = ""
     for i in details_parts:
@@ -350,4 +373,6 @@ async def help(interaction: Interaction, parts: Optional[int] = None):
         message)
 
 
-bot.run(MY_SECRET)
+# bot.run(MY_SECRET)
+bot.run(
+    "MTA1NzY1MTgzNjAxMTY5MjExMw.GYOq7a.LPD3hvxEUZnL2ihGXBfHRQPM4IgkIWaCBzQS1M")
