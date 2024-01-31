@@ -1,4 +1,3 @@
-# This example requires the 'message_content' intent.
 import discord
 import os
 import openai
@@ -258,47 +257,13 @@ async def on_ready():
   print("Bot is ready, ho gaya")
 
 
-# @bot.event
-# async def on_message(message):
-#   # if message.author == bot.user or message.channel.id != 1200389727023546389:
-#   #   return
-#   if message.author == bot.user:
-#     return
-# else:
-#   await message.channel.send("Type /help to get more info of republic bot")
-
-# @bot.tree.command()
-# async def search(interaction: Interaction, arg: str):
-#   prompt = arg
-#   response = openai.ChatCompletion.create(
-#       model="gpt-3.5-turbo",
-#       messages=[{
-#           "role": "system",
-#           "content": "You are helpful assistant on Indian constitution"
-#       }, {
-#           "role":
-#           "user",
-#           "content":
-#           f"You are a wise person on Indian constituion. You have to give very concise response exact 2 sentence within 50 words(remember word count)\n{prompt}"
-#       }])
-#   await interaction.response.send_message(
-#       response["choices"][0]["message"]["content"])
-
-
 @bot.tree.command(name="help",
                   description="Get information about available commands")
 @app_commands.describe(parts="Details about any one part among 22 parts",
                        articleinfo="Details of any individual article")
-# @app_commands.describe(articles="Details about any one part among 22 parts")
 async def help(interaction: Interaction,
                parts: Optional[int] = None,
-               articleinfo: Optional[int] = None):
-  # allowed_channel_id = 1200389727023546389  # Replace with your desired channel ID
-  # if interaction.channel_id != allowed_channel_id:
-  #   await interaction.response.send_message(
-  #       "This command can only be used in the https://discord.com/channels/913712321161998348/1200389727023546389 channel."
-  #   )
-  #   return
+               articleinfo: Optional[str] = None):
 
   if parts is None and articleinfo is None:
     # Display general help
@@ -309,7 +274,7 @@ async def help(interaction: Interaction,
 
 🚀 **Usage:**
 - Type `/help <part number>` for information on a specific part.
-- Type `/help <article number>` for information on a specific part.
+- Type `/help <article number>` for information on a specific article.
 - Use any negative number or a number greater than 22 in part number or number greater than 395 in article number to get the complete list.
 
 📚 **Examples:**
