@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Holi</title>
+<style>
+ body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: sans-serif;
+    background-color: white;
+    transition: background-color 0.5s ease;
+}
+
+#happy-holi {
+    font-size: 4rem;
+    transition: color 0.5s ease;
+}
+
+#celebrate-button {
+    padding: 1rem 2rem;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+
+.celebrating {
+    background-image: linear-gradient(to right, 
+        red, orange, yellow, rgb(35, 238, 35), blue,pink, indigo, violet);
+    background-size: 800%;
+    animation: colors 8s ease infinite alternate;
+}
+
+.holi-txt {
+    color: white;
+}
+
+.btn-txt{
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+}
+
+@keyframes colors {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 0%; }
+    100% { background-position: 0% 0%; }
+}
+</style>
+</head>
+<body>
+        <div id="container">
+            <h1 id="happy-holi">Happy Holi</h1>
+            <div style="display: flex;justify-content: center;background-color: transparent;">
+                <button id="celebrate-button">Let's Celebrate Holi!</button>
+            </div>
+            
+        </div>
+  
+<script>
+const celebrateButton = document.getElementById('celebrate-button');
+const happyHoliText = document.getElementById('happy-holi');
+const btntxt=document.getElementById("celebrate-button")
+const body = document.body;
+
+celebrateButton.addEventListener('click', () => {
+  body.classList.toggle('celebrating');
+  happyHoliText.classList.toggle('holi-txt'); 
+  btntxt.classList.toggle('btn-txt');
+
+});
+</script>
+</body>
+</html>
